@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>BankBankConsole</RootNamespace>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BankBankApp.BO\BankBankApp.BO.vbproj" />
+    <ProjectReference Include="..\BankBankApp.DAL\BankBankApp.DAL.vbproj" />
+  </ItemGroup>
+
+</Project>
