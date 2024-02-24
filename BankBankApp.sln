@@ -9,7 +9,9 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "BankBankApp.DAL", "BankBank
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "BankBankApp.BO", "BankBankApp.BO\BankBankApp.BO.vbproj", "{3BCA23E8-8859-4463-9BB9-0A4422E15CA4}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BankBankConsole", "BankBankConsole\BankBankConsole.vbproj", "{1FF5475A-8BB8-423D-88C5-E9C865F59AEC}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "BankBankConsole", "BankBankConsole\BankBankConsole.vbproj", "{1FF5475A-8BB8-423D-88C5-E9C865F59AEC}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BankBank.WebFormApp", "BankBank.WebFormApp\BankBank.WebFormApp.vbproj", "{4E8D9BB9-AA86-42A9-B129-A797277B70EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{1FF5475A-8BB8-423D-88C5-E9C865F59AEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FF5475A-8BB8-423D-88C5-E9C865F59AEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FF5475A-8BB8-423D-88C5-E9C865F59AEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E8D9BB9-AA86-42A9-B129-A797277B70EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E8D9BB9-AA86-42A9-B129-A797277B70EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E8D9BB9-AA86-42A9-B129-A797277B70EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E8D9BB9-AA86-42A9-B129-A797277B70EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

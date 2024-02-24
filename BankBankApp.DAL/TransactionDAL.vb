@@ -52,6 +52,68 @@ Public Class TransactionDAL
         End Try
     End Function
 
+    Public Sub CreateBillTransaction(accountID As Integer, billID As Integer, amount As Decimal, description As String) Implements ITransaction.CreateBillTransaction
+        Try
+            cmd = New SqlCommand("Transactions.CreateBillTransaction", conn) With {
+            .CommandType = CommandType.StoredProcedure
+        }
+            cmd.Parameters.AddWithValue("@AccountID", accountID)
+            cmd.Parameters.AddWithValue("@BillID", billID)
+            cmd.Parameters.AddWithValue("@Amount", amount)
+            cmd.Parameters.AddWithValue("@Description", description)
+            conn.Open()
+            cmd.ExecuteNonQuery()
+        Catch sqlEx As SqlException
+            Throw New Exception("SQL Error: " & sqlEx.Message)
+        Catch ex As Exception
+            Throw New Exception("Error: " & ex.Message)
+        Finally
+            cmd.Dispose()
+            conn.Close()
+        End Try
+    End Sub
+
+    Public Sub CreateTransferTransaction(sourceAccountID As Integer, receiverAccountID As Integer, amount As Decimal, description As String) Implements ITransaction.CreateTransferTransaction
+        Try
+            cmd = New SqlCommand("Transactions.CreateTransferTransaction", conn) With {
+            .CommandType = CommandType.StoredProcedure
+        }
+            cmd.Parameters.AddWithValue("@SourceAccountID", sourceAccountID)
+            cmd.Parameters.AddWithValue("@ReceiverAccountID", receiverAccountID)
+            cmd.Parameters.AddWithValue("@Amount", amount)
+            cmd.Parameters.AddWithValue("@Description", description)
+            conn.Open()
+            cmd.ExecuteNonQuery()
+        Catch sqlEx As SqlException
+            Throw New Exception("SQL Error: " & sqlEx.Message)
+        Catch ex As Exception
+            Throw New Exception("Error: " & ex.Message)
+        Finally
+            cmd.Dispose()
+            conn.Close()
+        End Try
+    End Sub
+
+    Public Sub CreateWithdrawTransaction(accountID As Integer, amount As Decimal, description As String) Implements ITransaction.CreateWithdrawTransaction
+        Try
+            cmd = New SqlCommand("Transactions.CreateWithdrawTransaction", conn) With {
+            .CommandType = CommandType.StoredProcedure
+        }
+            cmd.Parameters.AddWithValue("@AccountID", accountID)
+            cmd.Parameters.AddWithValue("@Amount", amount)
+            cmd.Parameters.AddWithValue("@Description", description)
+            conn.Open()
+            cmd.ExecuteNonQuery()
+        Catch sqlEx As SqlException
+            Throw New Exception("SQL Error: " & sqlEx.Message)
+        Catch ex As Exception
+            Throw New Exception("Error: " & ex.Message)
+        Finally
+            cmd.Dispose()
+            conn.Close()
+        End Try
+    End Sub
+
     Private Function GetNullableInt32(dr As SqlDataReader, fieldName As String) As Integer?
         Dim ordinal As Integer = dr.GetOrdinal(fieldName)
         If Not dr.IsDBNull(ordinal) Then
