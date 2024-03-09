@@ -18,7 +18,9 @@
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     Balance
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">IDR <%= Session("lastName")%></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    IDR <%= Session("Balance")%>
+                                </div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-coins fa-2x text-gray-300"></i>
@@ -35,7 +37,7 @@
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     Account Number
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"><%= Session("lastName")%></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><%= Session("AccountNumber")%></div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-credit-card fa-2x text-gray-300"></i>

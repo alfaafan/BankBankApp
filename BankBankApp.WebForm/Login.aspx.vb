@@ -34,9 +34,9 @@ Public Class WebForm1
 
                 Dim returnUrl = Request.QueryString("ReturnUrl")
                 If String.IsNullOrEmpty(returnUrl) Then
-                    Response.Redirect("~/" & returnUrl)
-                Else
                     Response.Redirect("~/Dashboard.aspx")
+                Else
+                    Response.Redirect("~/" & returnUrl)
                 End If
             Else
                 ltMessage.Text = "<span class='alert alert-danger'>Invalid Username or Password</span><br/><br/>"

@@ -5,9 +5,9 @@ using BankBankApp.BO;
 
 namespace BankBankApp.DAL.Interfaces
 {
-    public interface IUserDAL : ICrud<User>
-    {
-        User GetByUsername(string username);
-        User Login(string username, string password);
-    }
+	public interface IUserDAL : ICrud<User>
+	{
+		User GetByUsername(string username);
+		UserViewBO Login(string username, string password);
+	}
 }

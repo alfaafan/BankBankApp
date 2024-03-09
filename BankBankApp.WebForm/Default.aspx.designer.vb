@@ -14,11 +14,29 @@ Option Explicit On
 Partial Public Class _Default
 
     '''<summary>
-    '''ltGreetings control.
+    '''form1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ltGreetings As Global.System.Web.UI.WebControls.Literal
+    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+
+    '''<summary>
+    '''HeroImage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HeroImage As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''CallToActionBtn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CallToActionBtn As Global.System.Web.UI.WebControls.Button
 End Class
