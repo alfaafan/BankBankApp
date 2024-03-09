@@ -29,12 +29,14 @@ Public Class WebForm1
                 Session("Email") = _user.Email
                 Session("Phone") = _user.Phone
                 Session("DateOfBirth") = _user.DateOfBirth
+                Session("AccountNumber") = _user.AccountNumber
+                Session("Balance") = _user.Balance
 
                 Dim returnUrl = Request.QueryString("ReturnUrl")
                 If String.IsNullOrEmpty(returnUrl) Then
                     Response.Redirect("~/" & returnUrl)
                 Else
-                    Response.Redirect("~/Default.aspx")
+                    Response.Redirect("~/Dashboard.aspx")
                 End If
             Else
                 ltMessage.Text = "<span class='alert alert-danger'>Invalid Username or Password</span><br/><br/>"

@@ -13,7 +13,7 @@
     </asp:PlaceHolder>
 
     <webopt:BundleReference runat="server" Path="~/Content/css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link type="image/png" sizes="16x16" rel="icon" href="/icons8-bank-16.png">
     <link href="/Startbootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -67,17 +67,14 @@
                         <span>Dashboard</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Transactions.aspx">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Transactions</span></a>
+                    <a class="nav-link" href="/Profile">
+                        <i class="fas fa-fw fa-user"></i>
+                        <span>Profile</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="TransactionCategoryPage.aspx">
-                        <i class="fas fa-fw fa-file"></i>
-                        <span>Transaction Category</span></a>
-                </li>
+
                 <!-- Divider -->
                 <hr class="sidebar-divider">
+
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
@@ -93,8 +90,8 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="buttons.html">Transfer</a>
-                            <a class="collapse-item" href="cards.html">Bill Payment</a>
+                            <a class="collapse-item" href="Transfer.aspx">Transfer</a>
+                            <a class="collapse-item" href="BillPayment.aspx">Bill Payment</a>
                         </div>
                     </div>
                 </li>
@@ -126,11 +123,11 @@
                     Admin
                 </div>
 
-                <!-- Nav Item - Charts -->
+                <!-- Nav Item - Transaction Categories -->
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Charts</span></a>
+                    <a class="nav-link" href="TransactionCategoryPage.aspx">
+                        <i class="fas fa-fw fa-list"></i>
+                        <span>Transaction Categories</span></a>
                 </li>
 
                 <!-- Nav Item - Tables -->
