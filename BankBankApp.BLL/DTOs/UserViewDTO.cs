@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BankBankApp.BO
+namespace BankBankApp.BLL.DTOs
 {
-	public class UserViewBO
+	public class UserViewDTO
 	{
 		public int UserID { get; set; }
 		public string Username { get; set; }
@@ -15,10 +15,8 @@ namespace BankBankApp.BO
 		public string Phone { get; set; }
 		public DateTime DateOfBirth { get; set; }
 		public string AccountNumber { get; set; }
-		public string CardNumber { get; set; }
 		public decimal Balance { get; set; }
 		public string Status { get; set; }
 		public DateTime LastLoginDate { get; set; }
-
 	}
 }

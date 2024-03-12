@@ -2,39 +2,100 @@
 using System.Collections.Generic;
 using BankBankApp.BO;
 using BankBankApp.DAL.Interfaces;
+using System.Data.SqlClient;
+using Dapper;
 
 namespace BankBankApp.DAL
 {
-    public class TransactionDAL : ITransaction
-    {
-        public void Create(Transaction obj)
-        {
-            throw new NotImplementedException();
-        }
+	public class TransactionDAL : ITransactionDAL
+	{
+		private string GetConnectionString()
+		{
+			return Helper.GetConnectionString();
+		}
+		public void Create(Transaction obj)
+		{
+			throw new NotImplementedException();
+		}
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
+		public void Delete(int id)
+		{
+			throw new NotImplementedException();
+		}
 
-        public IEnumerable<Transaction> Get()
-        {
-            throw new NotImplementedException();
-        }
+		public void Deposit(Transaction transaction)
+		{
+			throw new NotImplementedException();
+		}
 
-        public IEnumerable<Transaction> GetByAccountID(int accountID)
-        {
-            throw new NotImplementedException();
-        }
+		public IEnumerable<Transaction> Get()
+		{
+			throw new NotImplementedException();
+		}
 
-        public Transaction GetByID(int id)
-        {
-            throw new NotImplementedException();
-        }
+		public IEnumerable<Transaction> GetByAccountID(int accountID)
+		{
+			throw new NotImplementedException();
+		}
 
-        public Transaction Update(Transaction obj, int id)
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public Transaction GetByID(int id)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void PayBill(Transaction transaction)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void Transfer(Transaction transaction)
+		{
+			using (SqlConnection connection = new SqlConnection(GetConnectionString
+				()))
+			{
+				connection.Open();
+				var sql = "[Transactions].[TransferTransaction]";
+				var param = new
+				{
+					SourceAccountID = transaction.SourceAccountID,
+					ReceiverAccountID = transaction.ReceiverAccountID,
+					Amount = transaction.Amount,
+					Description = transaction.Description,
+				};
+
+				try
+				{
+					connection.Execute(sql, param, commandType: System.Data.CommandType.StoredProcedure);
+				}
+				catch (Exception)
+				{
+					throw;
+				}
+			}
+		}
+
+		public void Update(Transaction obj, int id)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IEnumerable<Transaction> GetByUserID(int userID)
+		{
+			using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+			{
+				connection.Open();
+				var sql = "Select * From dbo.UserTransactionHistory WHERE UserID = @UserID ORDER BY TransactionDate DESC";
+				var param = new { UserID = userID };
+
+				try
+				{
+					return connection.Query<Transaction>(sql, param);
+				}
+				catch (Exception)
+				{
+					throw;
+				}
+			}
+		}
+	}
 }

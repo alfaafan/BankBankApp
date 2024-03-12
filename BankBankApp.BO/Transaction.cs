@@ -9,8 +9,11 @@ namespace BankBankApp.BO
     {
         public int TransactionID { get; set; }
         public int TransactionCategoryID { get; set; }
+        public string TransactionCategory { get; set; }
+        public int UserID { get; set; }
         public int SourceAccountID { get; set; }
         public int? ReceiverAccountID { get; set; }
+        public string ReceiverAccountNumber { get; set; }
         public int? BillID { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }

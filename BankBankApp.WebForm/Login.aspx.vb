@@ -1,4 +1,5 @@
-﻿Imports BankBankApp.BLL
+﻿Imports System.Globalization
+Imports BankBankApp.BLL
 Imports BankBankApp.BLL.DTOs
 
 Public Class WebForm1
@@ -23,6 +24,7 @@ Public Class WebForm1
             Dim _user = _userBLL.Login(_userDTO.Username, _userDTO.Password)
 
             If _user IsNot Nothing Then
+                Session("UserID") = _user.UserID
                 Session("Username") = _user.Username
                 Session("FirstName") = _user.FirstName
                 Session("LastName") = _user.LastName
@@ -30,7 +32,8 @@ Public Class WebForm1
                 Session("Phone") = _user.Phone
                 Session("DateOfBirth") = _user.DateOfBirth
                 Session("AccountNumber") = _user.AccountNumber
-                Session("Balance") = _user.Balance
+                Session("CardNumber") = SeparateStringWithHyphens(_user.CardNumber)
+                Session("Balance") = ConvertToMoneyFormat(_user.Balance, "IDR")
 
                 Dim returnUrl = Request.QueryString("ReturnUrl")
                 If String.IsNullOrEmpty(returnUrl) Then
@@ -46,4 +49,39 @@ Public Class WebForm1
         End Try
 
     End Sub
+
+    Function ConvertToMoneyFormat(ByVal number As Double, ByVal currencyCode As String) As String
+        Dim culture As CultureInfo = CultureInfo.CreateSpecificCulture("id-ID")
+        Dim formatInfo As NumberFormatInfo = CType(culture.NumberFormat.Clone(), NumberFormatInfo)
+        formatInfo.CurrencySymbol = GetCurrencySymbol(currencyCode)
+
+        Return number.ToString("C2", formatInfo)
+    End Function
+
+    Function GetCurrencySymbol(ByVal currencyCode As String) As String
+        Select Case currencyCode.ToUpper()
+            Case "IDR"
+                Return "Rp"
+                ' Add more cases for other currency codes if needed
+            Case Else
+                Throw New ArgumentException("Unsupported currency code")
+        End Select
+    End Function
+
+    Public Function SeparateStringWithHyphens(text As String) As String
+        If String.IsNullOrEmpty(text) Then
+            Return "No Card"
+        End If
+
+        Dim chunkSize As Integer = 4
+        Dim parts As List(Of String) = New List(Of String)()
+
+        For i As Integer = 0 To text.Length - 1 Step chunkSize
+            Dim chunkLength As Integer = Math.Min(chunkSize, text.Length - i)
+            parts.Add(text.Substring(i, chunkLength))
+        Next
+
+        Return String.Join(" ", parts)
+    End Function
+
 End Class

@@ -53,7 +53,7 @@
       <HintPath>..\packages\Azure.Identity.1.10.3\lib\netstandard2.0\Azure.Identity.dll</HintPath>
     </Reference>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.2.1.28\lib\net461\Dapper.dll</HintPath>
+      <HintPath>..\packages\Dapper.2.1.35\lib\net461\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -258,6 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="BillPayment.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -278,6 +279,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Dashboard.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="EditProfile.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="ForgotPassword.aspx" />
     <Content Include="Global.asax" />
@@ -313,6 +315,8 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Login.aspx" />
     <Content Include="Logout.ashx" />
+    <Content Include="Transfer.aspx" />
+    <Content Include="TransferConfirmation.aspx" />
     <Content Include="WebForm2.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2038,6 +2042,13 @@
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="BillPayment.aspx.designer.vb">
+      <DependentUpon>BillPayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BillPayment.aspx.vb">
+      <DependentUpon>BillPayment.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Contact.aspx.designer.vb">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
@@ -2058,6 +2069,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditProfile.aspx.designer.vb">
+      <DependentUpon>EditProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditProfile.aspx.vb">
+      <DependentUpon>EditProfile.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ForgotPassword.aspx.designer.vb">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
@@ -2117,6 +2135,20 @@
     </Compile>
     <Compile Include="TransactionCategoryPage.aspx.vb">
       <DependentUpon>TransactionCategoryPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Transfer.aspx.designer.vb">
+      <DependentUpon>Transfer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Transfer.aspx.vb">
+      <DependentUpon>Transfer.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="TransferConfirmation.aspx.designer.vb">
+      <DependentUpon>TransferConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TransferConfirmation.aspx.vb">
+      <DependentUpon>TransferConfirmation.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.vb">
@@ -2358,6 +2390,10 @@
     <ProjectReference Include="..\BankBankApp.BLL\BankBankApp.BLL.csproj">
       <Project>{6D7FAF84-CC30-46E2-A3FD-CD234E2202D4}</Project>
       <Name>BankBankApp.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankBankApp.BO\BankBankApp.BO.csproj">
+      <Project>{3B9DCBC3-C6B6-47C5-B3D1-656F05074A8C}</Project>
+      <Name>BankBankApp.BO</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

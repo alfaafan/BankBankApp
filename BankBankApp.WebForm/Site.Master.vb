@@ -18,4 +18,8 @@
             End If
         End If
     End Sub
+
+    Function IsActive(ByVal pageName As String) As Boolean
+        Return Request.Url.AbsolutePath.ToLower().Contains(pageName.ToLower())
+    End Function
 End Class

@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class Dashboard
 
     '''<summary>
+    '''rptActivity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rptActivity As Global.System.Web.UI.WebControls.Repeater
+
+    '''<summary>
     '''ltGreetings control.
     '''</summary>
     '''<remarks>

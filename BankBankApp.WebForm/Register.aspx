@@ -11,7 +11,7 @@
         rel="stylesheet" />
     <link href="/Startbootstrap/css/sb-admin-2.min.css" rel="stylesheet" />
 </head>
-<body class="bg-gradient-primary">
+<body class="bg-gradient-dark">
     <form id="form1" runat="server">
         <div class="container">
 
@@ -72,7 +72,7 @@
                                     <a class="small" href="forgot-password.html">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="login.html">Already have an account? Login!</a>
+                                    <a class="small" href="Login.aspx">Already have an account? Login!</a>
                                 </div>
                             </div>
                         </div>

@@ -11,7 +11,7 @@
         rel="stylesheet" />
     <link href="/Startbootstrap/css/sb-admin-2.min.css" rel="stylesheet" />
 </head>
-<body class="bg-gradient-primary">
+<body class="bg-gradient-dark">
     <form id="form1" runat="server">
         <div>
             <div class="container">
@@ -26,7 +26,7 @@
                                 <!-- Nested Row within Card Body -->
                                 <div class="row">
                                     <div class="col-lg-6 d-none d-lg-block">
-                                        <img src="https://images.unsplash.com/photo-1612812166620-a072f77ec45b?q=80&w=2010&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" width="460" alt="El Gato" />
+                                        <img src="https://plus.unsplash.com/premium_photo-1680363254668-b9301d4d7390?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGJhbmt8ZW58MHx8MHx8fDA%3D" width="460" alt="Bank" />
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="p-5">

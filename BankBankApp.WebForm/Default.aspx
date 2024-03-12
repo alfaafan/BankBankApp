@@ -18,7 +18,7 @@
     <!-- Custom styles for this template-->
     <link href="/Startbootstrap/css/sb-admin-2.min.css" rel="stylesheet" />
 </head>
-<body>
+<body class="bg-dark">
 
     <form id="form1" runat="server">
         <asp:ScriptManager runat="server">
@@ -39,16 +39,20 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-        <div class="container p-5">
-            <div class="row">
-                <div class="col-md-6">
-                    <asp:Image ID="HeroImage" runat="server" ImageUrl="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" CssClass="img-fluid" />
-                </div>
-                <div class="col-md-6">
-                    <h1>Your Landing Page Headline</h1>
-                    <p>This is a brief description of your product or service. Highlight its benefits and convince users to take action.</p>
-                    <asp:Button ID="CallToActionBtn" runat="server" Text="Learn More" CssClass="btn btn-primary" />
-                    <a href="/Login.aspx" class="btn btn-primary">Login</a>
+        <div class="">
+            <div class="o-hidden shadow-lg border-0">
+                <div class="row">
+                    <div class="col-md-6">
+                        <asp:Image ID="HeroImage" Height="720" runat="server" ImageUrl="https://images.unsplash.com/photo-1607944023727-62f96d76b2d9?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" CssClass="jumbotron-fluid" />
+                    </div>
+                    <div class="col-md-6 p-5 text-light">
+                        <h1 class="font-weight-bold">BankBank</h1>
+                        <p class="my-3">
+                            Introducing BankBank, the mobile banking app that puts you in control of your finances. Forget scrambling to the ATM or waiting in line at the bank. With BankBank, you can manage your money anytime, anywhere, right from your phone.
+                        </p>
+                        <a href="/Register.aspx" class="btn btn-outline-light me-2">Register</a>
+                        <a href="/Login.aspx" class="btn btn-light">Login</a>
+                    </div>
                 </div>
             </div>
         </div>

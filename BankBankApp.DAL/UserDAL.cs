@@ -30,19 +30,21 @@ namespace BankBankApp.DAL
 					LastName = obj.LastName,
 					Phone = obj.Phone,
 					DateOfBirth = obj.DateOfBirth,
+					AccountNumber = Helper.GenerateAccountNumber(),
+					CardNumber = Helper.GenerateCardNumber()
 				};
 
 				try
 				{
 					int result = connection.Execute(sql, param, commandType: System.Data.CommandType.StoredProcedure);
-					if (result != 2)
+					if (result != 3)
 					{
-						throw new Exception("Error creating user: Cannot execute Register USer procedure");
+						throw new Exception("Error creating user: Cannot execute Register User procedure");
 					}
 				}
 				catch (SqlException e)
 				{
-					throw new ArgumentException($"{e.InnerException.Message} - {e.Number}");
+					throw new ArgumentException($"{e.Message} - {e.Number}");
 				}
 				catch (Exception e)
 				{
@@ -95,12 +97,19 @@ namespace BankBankApp.DAL
 		{
 			using (SqlConnection connection = new SqlConnection(GetConnectionString()))
 			{
-				var sql = "SELECT * FROM Users.Users WHERE UserID = @UserID";
-				var param = new
+				try
 				{
-					UserID = id
-				};
-				return connection.QueryFirstOrDefault<User>(sql, param);
+					var sql = "SELECT * FROM Users.Users WHERE UserID = @UserID";
+					var param = new
+					{
+						UserID = id
+					};
+					return connection.QueryFirstOrDefault<User>(sql, param);
+				}
+				catch (Exception e)
+				{
+					throw new ArgumentException("Error: " + e.Message);
+				}
 			}
 		}
 
@@ -117,11 +126,11 @@ namespace BankBankApp.DAL
 			}
 		}
 
-		public User Update(User obj, int id)
+		public void Update(User obj, int id)
 		{
 			using (SqlConnection connection = new SqlConnection(GetConnectionString()))
 			{
-				var sql = "UPDATE Users.Users SET Username = @Username, Email = @Email, Password = @Password, FirstName = @FirstName, LastName = @LastName, Phone = @Phone, DateOfBirth = @DateOfBirth, RegistrationDate = @RegistrationDate, LastLoginDate = @LastLoginDate WHERE UserID = @UserID";
+				var sql = "UPDATE Users.Users SET Username = @Username, Email = @Email, Password = @Password, FirstName = @FirstName, LastName = @LastName, Phone = @Phone, DateOfBirth = @DateOfBirth WHERE UserID = @UserID";
 				var param = new
 				{
 					Username = obj.Username,
@@ -131,8 +140,6 @@ namespace BankBankApp.DAL
 					LastName = obj.LastName,
 					Phone = obj.Phone,
 					DateOfBirth = obj.DateOfBirth,
-					RegistrationDate = obj.RegistrationDate,
-					LastLoginDate = obj.LastLoginDate,
 					UserID = id
 				};
 
@@ -143,7 +150,6 @@ namespace BankBankApp.DAL
 					{
 						throw new Exception("Error updating user");
 					}
-					return GetByID(id);
 				}
 				catch (SqlException e)
 				{
@@ -161,29 +167,22 @@ namespace BankBankApp.DAL
 		{
 			using (SqlConnection connection = new SqlConnection(GetConnectionString()))
 			{
-				var sql = "SELECT * FROM Users.UserView WHERE Username = @Username AND Password = @Password";
+				connection.Open();
+				var sql = "[Users].[LoginUser]";
 				var param = new
 				{
 					Username = username,
-					Password = password
+					Password = password,
 				};
+
 				try
 				{
-					var result = connection.QueryFirstOrDefault<UserViewBO>(sql, param);
-					if (result == null)
-					{
-						throw new ArgumentException("User not found");
-					}
+					var result = connection.QueryFirstOrDefault<UserViewBO>(sql, param, commandType: System.Data.CommandType.StoredProcedure);
 					return result;
 				}
 				catch (SqlException e)
 				{
 					throw new ArgumentException($"{e.InnerException.Message} - {e.Number}");
-				}
-				catch (Exception e)
-				{
-					throw new ArgumentException("Error: " + e.Message);
-					throw;
 				}
 			}
 		}

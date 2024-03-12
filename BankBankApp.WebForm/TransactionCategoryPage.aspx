@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Transaction Category" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="TransactionCategoryPage.aspx.vb" Inherits="BankBankApp.WebForm.TransactionCategoryPage" %>
+﻿<%@ Page Title="Transaction Category" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="TransactionCategoryPage.aspx.vb" Inherits="BankBankApp.WebForm.TransactionCategoryPage" EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">

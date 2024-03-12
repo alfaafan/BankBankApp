@@ -18,6 +18,142 @@ namespace BankBankApp.BLL
 		}
 		public void Create(UserCreateDTO user)
 		{
+			ValidateUserForm(user);
+
+			try
+			{
+				var newUser = new User
+				{
+					Username = user.Username,
+					Password = Helper.GetHash(user.Password),
+					Email = user.Email,
+					FirstName = user.FirstName,
+					LastName = user.LastName,
+					Phone = user.Phone,
+					DateOfBirth = user.DateOfBirth
+				};
+
+				_userDAL.Create(newUser);
+			}
+			catch (Exception e)
+			{
+				throw new ArgumentException("Error creating user", e);
+			}
+		}
+
+		public void Delete(int id)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IEnumerable<UserDTO> GetAll()
+		{
+			throw new NotImplementedException();
+		}
+
+		public UserDTO GetByID(int id)
+		{
+			try
+			{
+				var user = _userDAL.GetByID(id);
+				var userDTO = new UserDTO
+				{
+					Username = user.Username,
+					Email = user.Email,
+					FirstName = user.FirstName,
+					LastName = user.LastName,
+					Phone = user.Phone,
+					DateOfBirth = user.DateOfBirth
+				};
+				return userDTO;
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
+		}
+
+		public UserDTO GetByUsername(string username)
+		{
+			throw new NotImplementedException();
+		}
+
+		public UserViewBO Login(string username, string password)
+		{
+			ValidateLoginCredentials(username, password);
+
+			try
+			{
+				var user = _userDAL.Login(username, Helper.GetHash(password));
+
+				if (user == null)
+				{
+					throw new ArgumentException("User not found");
+				}
+
+				if (user.Password != Helper.GetHash(password))
+				{
+					throw new ArgumentException("Invalid password");
+				}
+
+				//UpdateLastLogin(user);
+
+				//var userDTO = new UserDTO
+				//{
+				//	Username = user.Username,
+				//	Email = user.Email,
+				//	FirstName = user.FirstName,
+				//	LastName = user.LastName,
+				//	Phone = user.Phone,
+				//	DateOfBirth = user.DateOfBirth
+				//};
+
+				return user;
+			}
+			catch (Exception e)
+			{
+				throw new ArgumentException("Error logging in", e);
+			}
+		}
+
+		public void Update(UserDTO user, int id)
+		{
+			try
+			{
+				var userToUpdate = new User
+				{
+					Username = user.Username,
+					Email = user.Email,
+					FirstName = user.FirstName,
+					LastName = user.LastName,
+					Phone = user.Phone,
+					DateOfBirth = user.DateOfBirth
+				};
+
+				_userDAL.Update(userToUpdate, id);
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
+		}
+
+		private void ValidateLoginCredentials(string username, string password)
+		{
+			if (string.IsNullOrEmpty(username))
+			{
+				throw new ArgumentException("Username is required");
+			}
+			if (string.IsNullOrEmpty(password))
+			{
+				throw new ArgumentException("Password is required");
+			}
+		}
+
+		public void ValidateUserForm(UserCreateDTO user)
+		{
 			if (string.IsNullOrEmpty(user.Username))
 			{
 				throw new ArgumentException("Username is required");
@@ -49,110 +185,6 @@ namespace BankBankApp.BLL
 			if (user.Password != user.RepeatPassword)
 			{
 				throw new ArgumentException("Passwords do not match");
-			}
-			try
-			{
-				var newUser = new User
-				{
-					Username = user.Username,
-					Password = Helper.GetHash(user.Password),
-					Email = user.Email,
-					FirstName = user.FirstName,
-					LastName = user.LastName,
-					Phone = user.Phone,
-					DateOfBirth = user.DateOfBirth
-				};
-
-				_userDAL.Create(newUser);
-			}
-			catch (Exception e)
-			{
-				throw new ArgumentException("Error creating user", e);
-			}
-		}
-
-		public void Delete(UserDTO user)
-		{
-			throw new NotImplementedException();
-		}
-
-		public IEnumerable<UserDTO> GetAll()
-		{
-			throw new NotImplementedException();
-		}
-
-		public UserDTO GetByID(int id)
-		{
-			throw new NotImplementedException();
-		}
-
-		public UserDTO GetByUsername(string username)
-		{
-			throw new NotImplementedException();
-		}
-
-		public UserDTO Login(string username, string password)
-		{
-			ValidateLoginCredentials(username, password);
-
-			try
-			{
-				var user = _userDAL.Login(username, Helper.GetHash(password));
-				var userBO = new User
-				{
-					UserID = user.UserID,
-					Username = user.Username,
-					Email = user.Email,
-					Password = user.Password,
-					FirstName = user.FirstName,
-					LastName = user.LastName,
-					Phone = user.Phone,
-					DateOfBirth = user.DateOfBirth,
-					LastLoginDate = user.LastLoginDate
-				};
-
-				if (user == null)
-				{
-					throw new ArgumentException("User not found");
-				}
-
-				if (user.Password != Helper.GetHash(password))
-				{
-					throw new ArgumentException("Invalid password");
-				}
-
-				UpdateLastLogin(user);
-
-				return new UserDTO
-				{
-					Username = user.Username,
-					Email = user.Email,
-					FirstName = user.FirstName,
-					LastName = user.LastName,
-					Phone = user.Phone,
-					DateOfBirth = user.DateOfBirth
-				};
-			}
-			catch (Exception e)
-			{
-				throw new Exception("Error logging in", e);
-			}
-		}
-
-		public void Update(UserDTO user)
-		{
-			throw new NotImplementedException();
-		}
-
-		private void ValidateLoginCredentials(string username, string password)
-		{
-			if (string.IsNullOrEmpty(username))
-			{
-				throw new ArgumentException("Username is required");
-			}
-			if (string.IsNullOrEmpty(password))
-			{
-				throw new ArgumentException("Password is required");
 			}
 		}
 

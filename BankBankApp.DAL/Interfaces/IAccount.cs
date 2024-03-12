@@ -5,7 +5,7 @@ using BankBankApp.BO;
 
 namespace BankBankApp.DAL.Interfaces
 {
-    public interface IAccount : ICrud<Account>
+    public interface IAccountDAL : ICrud<Account>
     {
         Account GetByAccountNumber(string accountNumber);
     }
