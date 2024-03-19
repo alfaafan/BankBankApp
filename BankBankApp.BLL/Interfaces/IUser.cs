@@ -9,11 +9,11 @@ namespace BankBankApp.BLL.Interfaces
 	public interface IUser
 	{
 		void Create(UserCreateDTO user);
-		void Update(UserDTO user, int id);
+		void Update(UserUpdateDTO user);
 		void Delete(int id);
 		UserDTO GetByID(int id);
-		UserDTO GetByUsername(string username);
+		UserViewDTO GetByUsername(string username);
 		IEnumerable<UserDTO> GetAll();
-		UserViewBO Login(string username, string password);
+		UserViewDTO Login(string username, string password);
 	}
 }

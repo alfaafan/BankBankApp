@@ -11,6 +11,7 @@ namespace BankBankApp.DAL.Interfaces
         IEnumerable<Transaction> GetByUserID(int userID);
         void Transfer(Transaction transaction);
         void PayBill(Transaction transaction);
-        void Deposit(Transaction transaction);
+        void Deposit(DepositBO transaction);
+        void Withdraw(WithdrawBO transaction);
     }
 }

@@ -19,6 +19,25 @@ namespace BankBankApp.BLL
 			_accountDAL = new AccountDAL();
 		}
 
+		public void Deposit(DepositDTO transaction)
+		{
+			var deposit = new DepositBO
+			{
+				AccountID = transaction.AccountID,
+				Amount = transaction.Amount
+			};
+
+			try
+			{
+				_transactionDAL.Deposit(deposit);
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
+		}
+
 		public IEnumerable<TransactionHistoryDTO> GetTransactionHistory(int userID)
 		{
 			var transactionHistory = new List<TransactionHistoryDTO>();
@@ -62,6 +81,26 @@ namespace BankBankApp.BLL
 			try
 			{
 				_transactionDAL.Transfer(transaction);
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
+		}
+
+		public void Withdraw(WithdrawDTO transaction)
+		{
+			var withdraw = new WithdrawBO
+			{
+				AccountID = transaction.AccountID,
+				Amount = transaction.Amount,
+				Description = transaction.Description
+			};
+
+			try
+			{
+				_transactionDAL.Withdraw(withdraw);
 			}
 			catch (Exception)
 			{

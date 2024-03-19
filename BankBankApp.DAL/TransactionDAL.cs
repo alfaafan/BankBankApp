@@ -23,9 +23,27 @@ namespace BankBankApp.DAL
 			throw new NotImplementedException();
 		}
 
-		public void Deposit(Transaction transaction)
+		public void Deposit(DepositBO transaction)
 		{
-			throw new NotImplementedException();
+			using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+			{
+				connection.Open();
+				var sql = "[Transactions].[sp_DepositTransaction]";
+				var param = new
+				{
+					AccountID = transaction.AccountID,
+					Amount = transaction.Amount
+				};
+
+				try
+				{
+					connection.Execute(sql, param, commandType: System.Data.CommandType.StoredProcedure);
+				}
+				catch (Exception)
+				{
+					throw;
+				}
+			}
 		}
 
 		public IEnumerable<Transaction> Get()
@@ -90,6 +108,30 @@ namespace BankBankApp.DAL
 				try
 				{
 					return connection.Query<Transaction>(sql, param);
+				}
+				catch (Exception)
+				{
+					throw;
+				}
+			}
+		}
+
+		public void Withdraw(WithdrawBO transaction)
+		{
+			using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+			{
+				connection.Open();
+				var sql = "[Transactions].[WithdrawalTransaction]";
+				var param = new
+				{
+					AccountID = transaction.AccountID,
+					Amount = transaction.Amount,
+					Description = transaction.Description,
+				};
+
+				try
+				{
+					connection.Execute(sql, param, commandType: System.Data.CommandType.StoredProcedure);
 				}
 				catch (Exception)
 				{

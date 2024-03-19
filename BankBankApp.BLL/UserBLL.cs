@@ -74,12 +74,37 @@ namespace BankBankApp.BLL
 			}
 		}
 
-		public UserDTO GetByUsername(string username)
+		public UserViewDTO GetByUsername(string username)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				var user = _userDAL.GetByUsername(username);
+				var userDTO = new UserViewDTO
+				{
+					UserID = user.UserID,
+					Username = user.Username,
+					Email = user.Email,
+					FirstName = user.FirstName,
+					LastName = user.LastName,
+					Phone = user.Phone,
+					DateOfBirth = user.DateOfBirth,
+					AccountNumber = user.AccountNumber,
+					AccountID = user.AccountID,
+					CardNumber = user.CardNumber,
+					CardExpiryDate = user.CardExpiryDate,
+					Balance = user.Balance,
+					Status = user.Status,
+					LastLoginDate = user.LastLoginDate
+				};
+				return userDTO;
+			}
+			catch (Exception ex)
+			{
+				throw new ArgumentException("Error getting user", ex);
+			}
 		}
 
-		public UserViewBO Login(string username, string password)
+		public UserViewDTO Login(string username, string password)
 		{
 			ValidateLoginCredentials(username, password);
 
@@ -97,19 +122,25 @@ namespace BankBankApp.BLL
 					throw new ArgumentException("Invalid password");
 				}
 
-				//UpdateLastLogin(user);
+				var userDTO = new UserViewDTO
+				{
+					UserID = user.UserID,
+					Username = user.Username,
+					Email = user.Email,
+					FirstName = user.FirstName,
+					LastName = user.LastName,
+					Phone = user.Phone,
+					DateOfBirth = user.DateOfBirth,
+					AccountNumber = user.AccountNumber,
+					AccountID = user.AccountID,
+					CardNumber = user.CardNumber,
+					CardExpiryDate = user.CardExpiryDate,
+					Balance = user.Balance,
+					Status = user.Status,
+					LastLoginDate = user.LastLoginDate
+				};
 
-				//var userDTO = new UserDTO
-				//{
-				//	Username = user.Username,
-				//	Email = user.Email,
-				//	FirstName = user.FirstName,
-				//	LastName = user.LastName,
-				//	Phone = user.Phone,
-				//	DateOfBirth = user.DateOfBirth
-				//};
-
-				return user;
+				return userDTO;
 			}
 			catch (Exception e)
 			{
@@ -117,12 +148,14 @@ namespace BankBankApp.BLL
 			}
 		}
 
-		public void Update(UserDTO user, int id)
+		public void Update(UserUpdateDTO user)
 		{
 			try
 			{
+				var existingUser = _userDAL.GetByUsername(user.Username);
 				var userToUpdate = new User
 				{
+					UserID = existingUser.UserID,
 					Username = user.Username,
 					Email = user.Email,
 					FirstName = user.FirstName,
@@ -131,7 +164,7 @@ namespace BankBankApp.BLL
 					DateOfBirth = user.DateOfBirth
 				};
 
-				_userDAL.Update(userToUpdate, id);
+				_userDAL.Update(userToUpdate, userToUpdate.UserID);
 			}
 			catch (Exception)
 			{

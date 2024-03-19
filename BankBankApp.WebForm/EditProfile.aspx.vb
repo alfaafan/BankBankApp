@@ -37,7 +37,7 @@ Public Class EditProfile
         _userToUpdate.DateOfBirth = DateTime.ParseExact(txtDateOfBirth.Text, "yyyy-MM-dd", Nothing)
 
         Try
-            _userBLL.Update(_userToUpdate, Session("UserID"))
+            '_userBLL.Update(_userToUpdate, Session("UserID"))
             ltMessage.Text = "<span class='alert alert-success'>Profile updated successfully</span><br/><br/>"
             Response.Redirect("~/Profile.aspx")
         Catch ex As Exception

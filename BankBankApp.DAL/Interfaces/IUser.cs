@@ -7,7 +7,7 @@ namespace BankBankApp.DAL.Interfaces
 {
 	public interface IUserDAL : ICrud<User>
 	{
-		User GetByUsername(string username);
+		UserViewBO GetByUsername(string username);
 		UserViewBO Login(string username, string password);
 	}
 }

@@ -15,6 +15,9 @@ namespace BankBankApp.BLL.DTOs
 		public string Phone { get; set; }
 		public DateTime DateOfBirth { get; set; }
 		public string AccountNumber { get; set; }
+		public int AccountID { get; set; }
+		public string CardNumber { get; set; }
+		public DateTime CardExpiryDate { get; set; }
 		public decimal Balance { get; set; }
 		public string Status { get; set; }
 		public DateTime LastLoginDate { get; set; }

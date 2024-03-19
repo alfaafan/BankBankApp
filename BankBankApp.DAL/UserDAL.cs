@@ -113,16 +113,16 @@ namespace BankBankApp.DAL
 			}
 		}
 
-		public User GetByUsername(string username)
+		public UserViewBO GetByUsername(string username)
 		{
 			using (SqlConnection connection = new SqlConnection(GetConnectionString()))
 			{
-				var sql = "SELECT * FROM Users.Users WHERE Username = @Username";
+				var sql = "SELECT * FROM Users.UserView WHERE Username = @Username";
 				var param = new
 				{
 					Username = username
 				};
-				return connection.QueryFirstOrDefault<User>(sql, param);
+				return connection.QueryFirstOrDefault<UserViewBO>(sql, param);
 			}
 		}
 
@@ -130,12 +130,11 @@ namespace BankBankApp.DAL
 		{
 			using (SqlConnection connection = new SqlConnection(GetConnectionString()))
 			{
-				var sql = "UPDATE Users.Users SET Username = @Username, Email = @Email, Password = @Password, FirstName = @FirstName, LastName = @LastName, Phone = @Phone, DateOfBirth = @DateOfBirth WHERE UserID = @UserID";
+				var sql = "UPDATE Users.Users SET Username = @Username, Email = @Email, FirstName = @FirstName, LastName = @LastName, Phone = @Phone, DateOfBirth = @DateOfBirth WHERE UserID = @UserID";
 				var param = new
 				{
 					Username = obj.Username,
 					Email = obj.Email,
-					Password = obj.Password,
 					FirstName = obj.FirstName,
 					LastName = obj.LastName,
 					Phone = obj.Phone,
