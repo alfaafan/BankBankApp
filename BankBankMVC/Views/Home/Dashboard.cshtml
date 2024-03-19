@@ -1,0 +1,172 @@
+﻿@using BankBankApp.MVC.Helper
+@model BankBankApp.BLL.DTOs.UserViewDTO;
+
+<div class="row d-flex align-items-end mb-4">
+	@* card *@
+	<div class="col-lg-4">
+		<div class="card bg-transparent shadow-xl">
+			<div class="overflow-hidden position-relative border-radius-xl">
+				<img src="/assets/img/illustrations/pattern-tree.svg" class="position-absolute opacity-2 start-0 top-0 w-100 z-index-1 h-100" alt="pattern-tree">
+				<span class="mask bg-gradient-dark opacity-10"></span>
+				<div class="card-body position-relative z-index-1 p-3">
+					<i class="material-icons text-white p-2 me-7">wifi</i>
+					<span class="badge badge-success ms-5">Active</span>
+					<h5 class="text-white mt-4 pb-2">@Helper.FormatCardNumber(@Model.CardNumber)</h5>
+					<div class="d-flex">
+						<div class="d-flex">
+							<div class="me-4">
+								<p class="text-white text-sm opacity-8 mb-0">Card Holder</p>
+								<h6 class="text-white mb-0">@Model.FirstName @Model.LastName</h6>
+							</div>
+							<div>
+								<p class="text-white text-sm opacity-8 mb-0">Expires</p>
+								<h6 class="text-white mb-0">@Helper.FormatExpirationDate(Model.CardExpiryDate)</h6>
+							</div>
+						</div>
+						<div class="ms-auto w-20 d-flex align-items-end justify-content-end">
+							<img class="w-60 mt-2" src="/assets/img/logos/mastercard.png" alt="logo">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-8">
+		<div class="row">
+			<h5 class="mb-4">
+				Hello, @Model.FirstName @Model.LastName
+			</h5>
+		</div>
+		<div class="row">
+			@* balance *@
+			<div class="col-lg-6 mb-xl-0 mb-4">
+				<div class="card">
+					<div class="card-header p-3 pt-2">
+						<div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+							<i class="material-icons opacity-10">account_balance_wallet</i>
+						</div>
+						<div class="text-end pt-1">
+							<p class="text-sm mb-4 text-capitalize">Balance</p>
+							<h4 class="mb-0">@Helper.ToRupiahFormat(Model.Balance)</h4>
+						</div>
+					</div>
+					<hr class="dark horizontal my-0">
+					<div class="card-footer p-3">
+					</div>
+				</div>
+			</div>
+			@* account number *@
+			<div class="col-lg-6 mb-xl-0 mb-4">
+				<div class="card">
+					<div class="card-header p-3 pt-2">
+						<div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+							<i class="material-icons opacity-10">credit_card</i>
+						</div>
+						<div class="text-end pt-1">
+							<p class="text-sm mb-4 text-capitalize">Account Number</p>
+							<h4 class="mb-0">@Model.AccountNumber</h4>
+						</div>
+					</div>
+					<hr class="dark horizontal my-0">
+					<div class="card-footer p-3">
+						@* <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p> *@
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col mb-md-0 mb-4">
+		<div class="card">
+			<div class="card-header pb-0">
+				<div class="row">
+					<div class="col-lg-6 col-7">
+						<h6>Transactions History</h6>
+						<p class="text-sm mb-0">
+							@if (ViewBag.Transactions != null && ViewBag.Transactions.Count > 0)
+							{
+								<i class="fa fa-check text-info" aria-hidden="true"></i>
+								<span>@ViewBag.Transactions.Count done</span>
+							}
+							else
+							{
+								<i class="fa fa-exclamation-triangle text-danger" aria-hidden="true"></i>
+								<span>No transactions</span>
+							}
+
+						</p>
+					</div>
+					<div class="col-lg-6 col-5 my-auto text-end">
+						<div class="dropdown float-lg-end pe-4">
+							<a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="fa fa-ellipsis-v text-secondary"></i>
+							</a>
+							<ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+								<li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
+								<li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
+								<li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-body px-0 pb-2">
+				<div class="table-responsive">
+					<table class="table align-items-center mb-0">
+						<thead>
+							<tr>
+								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Date</th>
+								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Transaction Category</th>
+								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Amount</th>
+								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Receiver Account Number</th>
+							</tr>
+						</thead>
+						<tbody>
+							@if (ViewBag.Transactions != null && ViewBag.Transactions.Count > 0)
+							{
+								foreach (var transaction in ViewBag.Transactions)
+								{
+									<tr>
+										<td class="text-center">
+											<div class="d-flex px-2 py-1 justify-content-center">
+												<div>
+													<img src="/assets/img/team-1.jpg" class="avatar avatar-sm me-3" alt="user1">
+												</div>
+												<div class="d-flex flex-column justify-content-center">
+													<h6 class="mb-0 text-sm">@transaction.TransactionDate</h6>
+												</div>
+											</div>
+										</td>
+										<td class="text-center">
+											<p class="text-sm font-weight-bold mb-0">@transaction.TransactionCategory</p>
+										</td>
+										<td class="text-center">
+											<p class="text-sm font-weight-bold mb-0">@Helper.ToRupiahFormat(transaction.Amount)</p>
+										</td>
+										<td class="text-center">
+											<p class="text-sm font-weight-bold mb-0">@transaction.ReceiverAccountNumber</p>
+										</td>
+									</tr>
+								}
+							}
+							else
+							{
+								<tr>
+									<td colspan="4" class="text-center">
+										<div class="d-flex align-items-center justify-content-center p-5">
+											<i class="material-icons me-2">block</i>
+											No transactions
+										</div>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

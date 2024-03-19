@@ -1,0 +1,69 @@
+﻿@using BankBankApp.MVC.Helper
+@model BankBankApp.BLL.DTOs.UserViewDTO;
+<div class="row">
+	<div class="col-6 col-xl-4">
+		<div class="card h-100">
+			<div class="card-header pb-0 p-3">
+				<div class="row">
+					<div class="col-md-8 d-flex align-items-center">
+						<h6 class="mb-0">Profile Information</h6>
+					</div>
+					<div class="col-md-4 text-end">
+						<a href="/Users/Profile/Edit">
+							<i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="card-body p-3">
+				<hr class="horizontal gray-light mb-4">
+				<ul class="list-group">
+					<li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> &nbsp; @Model.FirstName @Model.LastName</li>
+					<li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; @Model.Phone</li>
+					<li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Username:</strong> &nbsp; @Model.Username</li>
+					<li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; @Model.Email</li>
+					<li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Date of Birth:</strong> &nbsp; @Model.DateOfBirth.ToString("yyyy-MM-dd")</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	@* balance *@
+	<div class="col-lg-6 mb-xl-0 mb-4">
+		<div class="card mb-5">
+			<div class="card-header p-3 pt-2">
+				<div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+					<i class="material-icons opacity-10">account_balance_wallet</i>
+				</div>
+				<div class="text-end pt-1">
+					<h6 class="mb-4 text-capitalize text-bold9">Account Details</h6>
+					<p class="text-sm mb-0">Account Number</p>
+					<h4 class="mb-0">@Model.AccountNumber</h4>
+					<p class="text-sm mb-0">Balance</p>
+					<h4 class="mb-0">@Helper.ToRupiahFormat(Model.Balance)</h4>
+				</div>
+			</div>
+			<hr class="dark horizontal my-0">
+			<div class="card-footer p-3">
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-header p-3 pt-2">
+				<div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+					<i class="material-icons opacity-10">credit_card</i>
+				</div>
+				<div class="text-end pt-1">
+					<h6 class="mb-4 text-capitalize text-bold9">Card Details</h6>
+					<p class="text-sm mb-0">Card Number</p>
+					<h4 class="mb-0">@Helper.FormatCardNumber(Model.CardNumber)</h4>
+					<p class="text-sm mb-0">Expiry Date</p>
+					<h4 class="mb-0">@Model.CardExpiryDate.ToString("dd/MM")</h4>
+					<p class="text-sm mb-0">Status</p>
+					<h4 class="mb-0">@Model.Status</h4>
+				</div>
+			</div>
+			<hr class="dark horizontal my-0">
+			<div class="card-footer p-3">
+			</div>
+		</div>
+	</div>
+</div>

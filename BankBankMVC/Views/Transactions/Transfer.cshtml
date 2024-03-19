@@ -1,0 +1,44 @@
+﻿@model BankBankApp.BLL.DTOs.TransferDTO;
+
+<div class="row">
+	<div class="col-12">
+		<div class="card my-4">
+			<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+				<div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3 d-flex align-items-start">
+					<i class="material-icons text-light ps-3 pe-2">currency_exchange</i>
+					<h5 class="text-white text-capitalize">Transfer Money</h5>
+				</div>
+			</div>
+			<div class="card-body p-5">
+				<form asp-action="Transfer" method="post">
+					@Html.Raw(ViewBag.Message)
+					<div class="row">
+						<div class="col-md-6">
+							<div class="input-group input-group-outline my-3">
+								<label asp-for="ReceiverAccountNumber" class="form-label">Receiver Account</label>
+								<input asp-for="ReceiverAccountNumber" type="text" class="form-control" id="ReceiverAccountNumber" name="ReceiverAccountNumber" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="input-group input-group-outline my-3">
+								<label asp-for="Amount" class="form-label">Amount</label>
+								<input asp-for="Amount" type="number" class="form-control" id="Amount" name="Amount" />
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="input-group input-group-outline my-3">
+							<label asp-for="Description" class="form-label">Description</label>
+							<input asp-for="Description" class="form-control" id="Description" name="Description" />
+						</div>
+					</div>
+					<div class="text-center col-md-2">
+						<button type="submit" class="btn bg-gradient-dark w-100 mt-4 mb-0">Transfer</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
