@@ -19,5 +19,6 @@ namespace BankBankApp.Service.DTOs
 		public DateTime LastLoginDate { get; set; }
 		public IEnumerable<AccountDTO>? Accounts { get; set; }
 		public IEnumerable<CardDTO>? Cards { get; set; }
+		public IEnumerable<RoleDTO> Roles { get; set; } = new List<RoleDTO>();
 	}
 }

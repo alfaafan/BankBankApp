@@ -5,6 +5,7 @@ using BankBankApp.API.Helpers;
 using BankBankApp.API.ViewModels;
 using BankBankApp.Service.DTOs;
 using BankBankApp.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -17,13 +18,16 @@ namespace BankBankApp.API.Controllers
 	public class UsersController : ControllerBase
 	{
 		private readonly IUserService _userService;
+		private readonly IRoleService _roleService;
 		private readonly AppSettings _appSettings;
-		public UsersController(IUserService userService, IOptions<AppSettings> appSettings)
+		public UsersController(IUserService userService, IOptions<AppSettings> appSettings, IRoleService roleService)
 		{
 			_userService = userService;
 			_appSettings = appSettings.Value;
+			_roleService = roleService;
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
@@ -42,9 +46,15 @@ namespace BankBankApp.API.Controllers
 			}
 		}
 
+		[Authorize(Roles = "customer")]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> Get(int id)
 		{
+			var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+			if (userIdClaim == null || userIdClaim.Value != id.ToString())
+			{
+				return Forbid();
+			}
 			try
 			{
 				var user = await _userService.GetWithAccountAndCard(id);
@@ -70,16 +80,17 @@ namespace BankBankApp.API.Controllers
 				{
 					return BadRequest("Invalid username or password");
 				}
+				var roles = await _roleService.GetUserRolesByUsername(user.Username);
 
 				List<Claim> claims = new List<Claim>
 				{
 					new Claim(ClaimTypes.Name, user.Username),
 					new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString())
 				};
-				//foreach (var role in user.Roles)
-				//{
-				//	claims.Add(new Claim(ClaimTypes.Role, role));
-				//}
+				foreach (var role in roles)
+				{
+					claims.Add(new Claim(ClaimTypes.Role, role.RoleName));
+				}
 
 				var tokenHandler = new JwtSecurityTokenHandler();
 				var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -101,6 +112,7 @@ namespace BankBankApp.API.Controllers
 					DateOfBirth = user.DateOfBirth,
 					Accounts = user.Accounts,
 					Cards = user.Cards,
+					Roles = roles,
 					Token = tokenHandler.WriteToken(token)
 				};
 
@@ -126,6 +138,7 @@ namespace BankBankApp.API.Controllers
 			}
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> Delete(int id)
 		{
@@ -140,6 +153,7 @@ namespace BankBankApp.API.Controllers
 			}
 		}
 
+		[Authorize(Roles = "customer")]
 		[HttpPut("{id}")]
 		public async Task<IActionResult> Update(int id, UserUpdateDTO user)
 		{

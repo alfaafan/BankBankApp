@@ -18,6 +18,13 @@ namespace BankBankApp.Service.Profiles
 			CreateMap<UserUpdateDTO, User>().ReverseMap();
 			CreateMap<Account, AccountDTO>().ReverseMap();
 			CreateMap<Card, CardDTO>().ReverseMap();
+			CreateMap<Transaction, TransactionDTO>().ReverseMap();
+			CreateMap<TransferDTO, Transaction>();
+			CreateMap<WithdrawDTO, Transaction>();
+			CreateMap<DepositDTO, Transaction>();
+			CreateMap<TransactionCategory, TransactionCategoryDTO>().ReverseMap();
+			CreateMap<TransactionCreateDTO, Transaction>();
+			CreateMap<RoleDTO, Role>().ReverseMap();
 		}
 	}
 }

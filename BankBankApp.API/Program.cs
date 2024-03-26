@@ -7,6 +7,7 @@ using BankBankApp.Service.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,11 @@ builder.Services.AddScoped<ICardData, CardData>();
 builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<IAccountData, AccountData>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<ITransactionData, TransactionData>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<IRoleData, RoleData>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
 	options.UseSqlServer(builder.Configuration.GetConnectionString("BankBankConnectionString"));

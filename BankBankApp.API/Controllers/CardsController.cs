@@ -1,10 +1,12 @@
 ﻿using BankBankApp.Service.DTOs;
 using BankBankApp.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankBankApp.API.Controllers
 {
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class CardsController : ControllerBase
